@@ -1,0 +1,65 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Tel
+build_property.RootNamespace = Tel
+build_property.ProjectDir = E:\.net projects\Tel\Tel\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = E:\.net projects\Tel\Tel
+build_property._RazorSourceGeneratorDebug = 
+
+[E:/.net projects/Tel/Tel/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/.net projects/Tel/Tel/Pages/Home Page Components/CardComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZSBQYWdlIENvbXBvbmVudHNcQ2FyZENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/.net projects/Tel/Tel/Pages/Home Page Components/DataTableComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZSBQYWdlIENvbXBvbmVudHNcRGF0YVRhYmxlQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/.net projects/Tel/Tel/Pages/Home Page Components/IModalComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZSBQYWdlIENvbXBvbmVudHNcSU1vZGFsQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/.net projects/Tel/Tel/Pages/Home Page Components/ModelComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZSBQYWdlIENvbXBvbmVudHNcTW9kZWxDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/.net projects/Tel/Tel/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/.net projects/Tel/Tel/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/.net projects/Tel/Tel/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/.net projects/Tel/Tel/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-4u1rr6c6al
+
+[E:/.net projects/Tel/Tel/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-c2ura4d6ab
+
+[E:/.net projects/Tel/Tel/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/.net projects/Tel/Tel/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

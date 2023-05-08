@@ -1,0 +1,12 @@
+E:\.net projects\Tel\DataAccessLibrary\bin\Debug\net7.0\DataAccessLibrary.deps.json
+E:\.net projects\Tel\DataAccessLibrary\bin\Debug\net7.0\DataAccessLibrary.dll
+E:\.net projects\Tel\DataAccessLibrary\bin\Debug\net7.0\DataAccessLibrary.pdb
+E:\.net projects\Tel\DataAccessLibrary\obj\Debug\net7.0\DataAccessLibrary.csproj.AssemblyReference.cache
+E:\.net projects\Tel\DataAccessLibrary\obj\Debug\net7.0\DataAccessLibrary.GeneratedMSBuildEditorConfig.editorconfig
+E:\.net projects\Tel\DataAccessLibrary\obj\Debug\net7.0\DataAccessLibrary.AssemblyInfoInputs.cache
+E:\.net projects\Tel\DataAccessLibrary\obj\Debug\net7.0\DataAccessLibrary.AssemblyInfo.cs
+E:\.net projects\Tel\DataAccessLibrary\obj\Debug\net7.0\DataAccessLibrary.csproj.CoreCompileInputs.cache
+E:\.net projects\Tel\DataAccessLibrary\obj\Debug\net7.0\DataAccessLibrary.dll
+E:\.net projects\Tel\DataAccessLibrary\obj\Debug\net7.0\refint\DataAccessLibrary.dll
+E:\.net projects\Tel\DataAccessLibrary\obj\Debug\net7.0\DataAccessLibrary.pdb
+E:\.net projects\Tel\DataAccessLibrary\obj\Debug\net7.0\ref\DataAccessLibrary.dll

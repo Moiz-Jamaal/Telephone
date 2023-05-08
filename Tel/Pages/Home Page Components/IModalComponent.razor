@@ -1,0 +1,260 @@
+﻿@using DataAccessLibrary;
+@using DataAccessLibrary.Models;
+@inject ITelephoneData db;
+@inject NavigationManager NavigationManager
+<div class="col-2">
+    <button type="button" @onclick="() => modelDialog.Open()" class="btn btn-dark">Edit</button>
+</div>
+
+<ModelComponent @ref="@modelDialog" Title="Edit">
+    <form>
+       @* <div class="mb-3 col-3">
+            <label for="Fname" class="form-label">Full name</label>
+            <input type="text" class="form-control" id="Fname" @bind="telephone.Fname"   placeholder="Fname">
+        </div>
+
+        <div class="mb-3 col-3">
+            <label for="Itsid" class="form-label">Itsid</label>
+            <input type="text" class="form-control" id="Itsid" @bind="telephone.Itsid"  placeholder="Itsid">
+        </div>*@
+        <p class="text-info">Professional Details</p>
+
+       
+
+    <div class="row">
+
+            <div class="mb-3 col-3">
+                <label for="Fname" class="form-label">Full name</label>
+                <input type="text" class="form-control" id="Fname" @bind="telephone.Fname" placeholder="Full name">
+            </div>
+
+        <div class="mb-3 col-3">
+            <label for="Ctgry" class="form-label">Category</label>
+                <input type="text" class="form-control" id="Ctgry" @bind="telephone.Ctgry" placeholder="Category">
+        </div>
+
+        <div class="mb-3 col-3">
+            <label for="Dept" class="form-label">Department</label>
+                <input type="text" class="form-control" id="Dept" @bind="telephone.Dept" placeholder="Department">
+        </div>
+
+        <div class="mb-3 col-3">
+            <label for="Company" class="form-label">Company</label>
+                <input type="text" class="form-control" id="Company" @bind="telephone.Company" placeholder="Company">
+        </div>
+     </div>
+
+        <p class="text-info">Personal Details</p>
+       <div class="row">
+        <div class="mb-3 col-3">
+            <label for="AddA" class="form-label">Address</label>
+                <input type="text" class="form-control" id="AddA" @bind="telephone.AddA" placeholder="Address">
+        </div>
+
+        <div class="mb-3 col-2">
+            <label for="CityA" class="form-label">City</label>
+            <input type="text" class="form-control" id="CityA" @bind="telephone.CityA" placeholder="City">
+        </div>
+
+        <div class="mb-3 col-2">
+            <label for="PinA" class="form-label">Pin</label>
+                <input type="text" class="form-control" id="PinA" @bind="telephone.PinA" placeholder="Pin">
+        </div>
+
+        <div class="mb-3 col-2">
+            <label for="State" class="form-label">State</label>
+                <input type="text" class="form-control" id="State" @bind="telephone.StateA" placeholder="State">
+        </div>
+
+        <div class="mb-3 col-2">
+            <label for="Cntry" class="form-label">Country</label>
+                <input type="text" class="form-control" id="Cntry" @bind="telephone.CntryA" placeholder="Country">
+        </div>
+
+        </div>
+
+        <p class="text-info">Mobile/Residence/Email Details</p>
+       <div class="row">
+ 
+        <div class="mb-3 col-3">
+            <label for="MobA" class="form-label">Mobile No A</label>
+                <input type="text" class="form-control" id="MobA" @bind="telephone.MobA" placeholder="MobileA">
+        </div>
+            @if (!string.IsNullOrEmpty(telephone.MobA))
+                            {
+
+        <div class="mb-3 col-3">
+            <label for="MobB" class="form-label">Mobile No B</label>
+                <input type="text" class="form-control" id="MobB" @bind="telephone.MobB" placeholder="MobileB">
+        </div>
+                @if (!string.IsNullOrEmpty(telephone.MobB))
+                {
+        <div class="mb-3 col-3">
+            <label for="MobC" class="form-label">Mobile No C</label>
+                <input type="text" class="form-control" id="MobC" @bind="telephone.MobC" placeholder="MobileC">
+        </div>
+                }    }
+                 
+        <div class="mb-3 col-3">
+            <label for="ResA" class="form-label">Residence No A</label>
+                <input type="text" class="form-control" id="ResA" @bind="telephone.ResA" placeholder="ResidenceA">
+        </div>
+            @if (!string.IsNullOrEmpty(telephone.ResA))
+                {
+        <div class="mb-3 col-3">
+                    <label for="ResB" class="form-label">Residence No B</label>
+                <input type="text" class="form-control" id="ResB" @bind="telephone.ResB" placeholder="ResidenceB">
+        </div>
+                @if (!string.IsNullOrEmpty(telephone.ResB))
+                {
+                    <div class="mb-3 col-3">
+                        <label for="ResC" class="form-label">Residence No C</label>
+                <input type="text" class="form-control" id="ResC" @bind="telephone.ResC" placeholder="ResidenceC">
+        </div>
+                }}
+            <div class="mb-3 col-3">
+                <label for="EmailA" class="form-label">EmailA</label>
+                <input type="text" class="form-control" id="Email Id A" @bind="telephone.EmailA" placeholder="EmailA">
+            </div>
+            @if (!string.IsNullOrEmpty(telephone.EmailA))
+            {
+                <div class="mb-3 col-3">
+                    <label for="EmailB" class="form-label">EmailB</label>
+                    <input type="text" class="form-control" id="Email Id B" @bind="telephone.EmailB" placeholder="EmailB">
+                </div>
+                @if (!string.IsNullOrEmpty(telephone.EmailB))
+                {
+                    <div class="mb-3 col-3">
+                        <label for="EmailC" class="form-label">EmailC</label>
+                        <input type="text" class="form-control" id="Email Id C" @bind="telephone.EmailC" placeholder="EmailC">
+                    </div>
+                }   }
+
+        </div>
+
+        <p class="text-info">Office/Extention/Fax Details</p>
+        <div class="row">
+
+        <div class="mb-3 col-3">
+            <label for="OffA" class="form-label">OffA</label>
+                <input type="text" class="form-control" id="Office No A" @bind="telephone.OffA" placeholder="OffA">
+        </div>
+            @if (!string.IsNullOrEmpty(telephone.OffA))
+                {
+        <div class="mb-3 col-3">
+            <label for="OffB" class="form-label">OffB</label>
+                <input type="text" class="form-control" id="Office No B" @bind="telephone.OffB" placeholder="OffB">
+        </div>
+                @if (!string.IsNullOrEmpty(telephone.OffB))
+                {
+        <div class="mb-3 col-3">
+            <label for="OffC" class="form-label">OffC</label>
+                <input type="text" class="form-control" id="Office No C" @bind="telephone.OffC" placeholder="OffC">
+        </div>
+                }  }
+        <div class="mb-3 col-3">
+                <label for="ExtA" class="form-label">Extention No A</label>
+                <input type="text" class="form-control" id="ExtA" @bind="telephone.ExtA" placeholder="ExtA">
+        </div>
+            @if (!string.IsNullOrEmpty(telephone.ExtA))
+                {
+        <div class="mb-3 col-3">
+                    <label for="ExtB" class="form-label">Extention No B</label>
+                    <input type="text" class="form-control" id="ExtB" @bind="telephone.ExtB" placeholder="ExtB">
+        </div>
+                @if (!string.IsNullOrEmpty(telephone.ExtB))
+                {
+        <div class="mb-3 col-3">
+                        <label for="ExtC" class="form-label">Extention No C</label>
+                        <input type="text" class="form-control" id="ExtC" @bind="telephone.ExtC" placeholder="ExtC">
+        </div>
+                }  }
+
+            <div class="mb-3 col-3">
+                <label for="FaxA" class="form-label">Fax A</label>
+                <input type="text" class="form-control" id="FaxA" @bind="telephone.FaxA" placeholder="FaxA">
+            </div>
+            @if (!string.IsNullOrEmpty(telephone.FaxA))
+            {
+
+                <div class="mb-3 col-3">
+                    <label for="FaxB" class="form-label">Fax B</label>
+                    <input type="text" class="form-control" id="FaxB" @bind="telephone.FaxB" placeholder="FaxB">
+                </div>
+            }
+
+       
+        </div>
+    </form>
+
+    <input type="button" class="btn btn-primary" @bind="UpdateStauts" @onclick="() => Update()"> </input>
+
+        <button class="btn btn-primary" @onclick="() => modelDialog.Close()">close</button>
+   
+</ModelComponent>
+@code {
+    [Parameter]
+    public TelMaster telephone { get; set; }
+
+    public TelMaster updatedData;
+
+    [Parameter]
+    public EventCallback<TelMaster> OnUpdatedData { get; set; }
+
+    private ModelComponent modelDialog { get; set; }
+    private string UpdateStauts = "Update";
+
+    public async Task Update()
+    {
+        UpdateStauts = "updating...";
+        TelMaster UpdatedRecords = new TelMaster
+            {
+                SrNo = telephone.SrNo,
+                Itsid = telephone.Itsid,
+                Fname = telephone.Fname,
+                Ctgry = telephone.Ctgry,
+
+                Dept = telephone.Dept,
+
+
+                 Company = telephone.Company,
+
+                AddA = telephone.AddA,
+
+                 CityA = telephone.CityA,
+
+                PinA = telephone.PinA,
+
+                StateA = telephone.StateA,
+                CntryA = telephone.CntryA,
+                        FaxA = telephone.FaxA,
+                     FaxB = telephone.FaxB,
+
+                 MobA = telephone.MobA,
+                     MobB = telephone.MobB,
+                     MobC = telephone.MobC,
+                         ResA = telephone.ResA,
+                     ResB = telephone.ResB,
+                     ResC = telephone.ResC,
+                     OffA = telephone.OffA,
+                         OffB = telephone.OffB,
+                     OffC = telephone.OffC,
+
+                 ExtA = telephone.ExtA,
+                     ExtB = telephone.ExtB,
+
+                     ExtC = telephone.ExtC,
+
+                 EmailA = telephone.EmailA,
+                  EmailB = telephone.EmailB,
+                            EmailC = telephone.EmailC
+            };
+
+        UpdateStauts = await (Task<string>) db.UpdateData(UpdatedRecords);
+        updatedData = telephone;
+        await OnUpdatedData.InvokeAsync(updatedData);
+        //NavigationManager.NavigateTo("/DataTableComponent", true);
+    }
+ 
+    
+}

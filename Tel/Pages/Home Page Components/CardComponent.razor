@@ -1,0 +1,226 @@
+﻿@using DataAccessLibrary.Models;
+@using System.Text.RegularExpressions;
+@inject AccessService AccessService;
+
+@foreach (var telephone in filteredData)
+{
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                                    <div class="col">
+            @if (!string.IsNullOrEmpty(telephone.Ctgry))
+            {
+                        <span> Category :  @HighlightString( @telephone.Ctgry, searchTerm)  </span>
+            }
+            else
+            {
+            <span>Category : Not Found </span>
+
+            }
+            </div>
+                <div class="col">
+                    @if (!string.IsNullOrEmpty(telephone.Dept))
+                    {
+                        <span> Department :  @HighlightString( @telephone.Dept, searchTerm) </span>
+
+                    }
+                    else
+                    {
+                        <span>Department : Not Found </span>
+
+                    }
+                </div>
+                <div class="col">
+            @if (!string.IsNullOrEmpty(telephone.Company))
+            {
+                        <span> Company :  @HighlightString( @telephone.Company, searchTerm)  </span>
+
+
+            }
+            else
+            {
+            <span>Company : Not Found </span>
+
+            }
+            </div>
+
+                @if (AccessService.Admin == true)
+                {
+                    <div class="col">
+                    <IModalComponent telephone="@telephone" OnUpdatedData="OnChildValueChanged" />
+                    </div>
+                }
+                  </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h5 class="card-title">Name : @HighlightString(telephone.Fname, searchTerm) </h5>
+                </div>
+                @* <div class="col">
+            <h5 class="card-title"> City: @HighlightString(@telephone.CityA, searchTerm)</h5>
+            </div>
+            <div class="col">
+            <h5 class="card-title"> Its: @HighlightString(@telephone.Itsid, searchTerm)</h5>
+            </div>*@
+            </div>
+
+            <ul class="list-group">
+                <div class="row">
+                    @if (!string.IsNullOrEmpty(telephone.EmailA))
+                    {
+                        <div class="col">
+                    <li class="list-group-item">
+                        Email id :
+                        <a href="tel:@telephone.EmailA">@HighlightString(@telephone.EmailA, searchTerm) </a>
+
+                                @if (!string.IsNullOrEmpty(telephone.EmailB))
+                                {
+                            <a href="tel:@telephone.EmailB" class="ps-2">@HighlightString(@telephone.EmailB, searchTerm)</a>
+                                }
+                                @if (!string.IsNullOrEmpty(telephone.EmailC))
+                                {
+                            <a href="tel:@telephone.EmailC" class="ps-2">@HighlightString( @telephone.EmailC, searchTerm)</a>
+                                }
+                    </li>
+            </div>
+                    }
+                    @if (!string.IsNullOrEmpty(telephone.MobA))
+                    {
+            <div class="col">
+                <li class="list-group-item">
+                    Mobile no :
+                    <a href="tel:@telephone.MobA">@HighlightString(@telephone.MobA , searchTerm)</a>
+
+                                @if (!string.IsNullOrEmpty(telephone.MobB))
+                                {
+                        <a href="tel:@telephone.MobB" class="ps-2">@HighlightString(@telephone.MobB, searchTerm)</a>
+                                }
+                                @if (!string.IsNullOrEmpty(telephone.MobC))
+                                {
+                        <a href="tel:@telephone.MobC" class="ps-2"> @HighlightString(@telephone.MobC, searchTerm)</a>
+                                }
+                </li>
+            </div>
+                    }
+                    @if (!string.IsNullOrEmpty(telephone.ResA))
+                    {
+            <div class="col">
+                <li class="list-group-item">
+                    Residence No :
+                    <a href="tel:@telephone.ResA">@HighlightString(@telephone.ResA, searchTerm) </a>
+
+                                @if (!string.IsNullOrEmpty(telephone.ResB))
+                                {
+                        <a href="tel:@telephone.ResB" class="ps-2">@HighlightString(@telephone.ResB, searchTerm)</a>
+                                }
+                                @if (!string.IsNullOrEmpty(telephone.ResC))
+                                {
+                        <a href="tel:@telephone.ResC" class="ps-2">@HighlightString( @telephone.ResC, searchTerm)</a>
+                                }
+                </li>
+            </div>
+                    }
+                    @if (!string.IsNullOrEmpty(telephone.OffA))
+                    {
+            <div class="col">
+                <li class="list-group-item">
+                    Office No :
+                    <a href="tel: @telephone.OffA">@HighlightString( @telephone.OffA , searchTerm)</a>
+
+                                @if (!string.IsNullOrEmpty(telephone.OffB))
+                                {
+                        <a href="tel:@telephone.OffB" class="ps-2"> @HighlightString(@telephone.OffB, searchTerm)</a>
+
+
+                                }
+                                @if (!string.IsNullOrEmpty(telephone.OffC))
+                                {
+                        <a href='tel:@telephone.OffC' class="ps-2">@HighlightString(@telephone.OffC, searchTerm)</a>
+                                }
+                </li>
+            </div>
+                    }
+                    @if (!string.IsNullOrEmpty(telephone.ExtA))
+                    {
+            <div class="col">
+                <li class="list-group-item">
+                    Extention No :
+                    <a href="tel: @telephone.ExtA">@HighlightString( @telephone.ExtA, searchTerm) </a>
+
+                                @if (!string.IsNullOrEmpty(telephone.ExtB))
+                                {
+                        <a href="tel:@telephone.ExtB" class="ps-2">@HighlightString( @telephone.ExtB, searchTerm)</a>
+
+
+                                }
+                                @if (!string.IsNullOrEmpty(telephone.ExtC))
+                                {
+                        <a href='tel:@telephone.ExtC' class="ps-2">@HighlightString(@telephone.ExtC, searchTerm)</a>
+                                }
+                </li>
+            </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(telephone.FaxA))
+                    {
+            <div class="col">
+                <li class="list-group-item">
+                    Fax No :
+                    <a href="tel: @telephone.FaxA">@HighlightString( @telephone.FaxA , searchTerm)</a>
+
+                                @if (!string.IsNullOrEmpty(telephone.FaxB))
+                                {
+                        <a href="tel:@telephone.FaxB" class="ps-2">@HighlightString( @telephone.FaxB, searchTerm)</a>
+
+
+                                }
+                </li>
+            </div>
+                    }
+    </div>
+                            </ul>
+                        </div>
+                    </div>
+    <br />
+    i++;
+    @if (i == 50)
+    {
+        i = 0;
+        return;
+    }
+}
+@code {
+    [Parameter]
+    public List<TelMaster> filteredData { get; set; }
+    [Parameter]
+    public string searchTerm { get; set; }
+    private int i = 0;
+
+    ///////////highlight/////////
+    private MarkupString HighlightString(string text, string term)
+    {
+        if (text == null)
+        {
+
+            return (MarkupString)text;
+
+        }
+        else
+        {
+            string[] searchTerms = term.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            string pattern = string.Join("|", searchTerms.Select(t => Regex.Escape(t)));
+            string highlightedText = Regex.Replace(text, pattern, match => $"<span class=\"text-light bg-warning\">{match.Value}</span>", RegexOptions.IgnoreCase);
+            return (MarkupString)highlightedText;
+
+        }
+    }
+
+    /////////////
+    private void OnChildValueChanged(TelMaster value)
+    {
+        var index = filteredData.FindIndex(t => t.SrNo == value.SrNo);
+        filteredData[index] = value;
+        // do something with myValue
+    }
+}

@@ -1,0 +1,239 @@
+﻿@page "/DataTableComponent";
+@using DataAccessLibrary;
+@using DataAccessLibrary.Models;
+@using System.Text.Json;
+@using System.IO;
+@using OfficeOpenXml;
+@using System.Data;
+@inject ITelephoneData db;
+@inject AccessService AccessService;
+@inject IJSRuntime JSRuntime
+<div class="container">
+    <div class="form-outline">
+        <div class="row no-gutters">
+            <div class=" col-9">
+                <input type="search" id="form1" class="form-control " placeholder="Search" @bind-value="@searchTerm" @bind-value:event="oninput" @onkeyup="Search" />
+            </div>
+       
+             @if (isFilter)
+    {
+            <div class="col-3 ">
+            <div class="row no-gutters">
+              <div class=" col-1 ">
+                            <h5>@filteredData.Count</h5>
+                        </div>
+                        @if(AccessService.Admin == true){
+                             <div class="col ps-5">
+                        <button class="btn btn-success " @onclick="ExportToExcel">Export to Excel</button>
+            </div>
+                        }
+                   
+                 </div>
+            </div>
+    }
+        </div>
+    </div>
+</div>
+<br>
+
+
+@if (telephones != null)
+{
+    @if (isFilter)
+    {
+        @if (loading == false)
+        {
+            <CardComponent filteredData="@filteredData" searchTerm="@searchTerm" />
+
+        }
+        else
+        {
+            <p>Loading...</p>
+        }
+
+    }
+
+
+
+}
+
+
+else
+{
+    <p>Loading...</p>
+}
+
+
+
+
+@code {
+
+
+
+    ///////// Api call functions and variables ///////////////
+
+    private List<TelMaster> telephones;
+    private bool loading;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetAllNumbers();
+    }
+
+    private async Task GetAllNumbers()
+    {
+        telephones = await db.GetTelMasterList();
+
+
+    }
+
+    ///////////////////////// Search functions and variables /////////////////////////
+
+    //private string searchTerm { get; set; }
+
+    private List<TelMaster> filteredData;
+    private bool isFilter = false;
+    public string searchTerm;
+
+
+    protected void Search()
+    {
+        isFilter = true;
+        loading = true;
+        if (string.IsNullOrEmpty(searchTerm))
+        {
+            isFilter = false;
+        }
+       
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+
+            string[] searchTerms = searchTerm.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            filteredData = telephones.Where(t =>
+                (t.Fname != null && searchTerms.All(term => t.Fname.Contains(term, StringComparison.OrdinalIgnoreCase)))||
+             (t.FaxA != null && t.FaxA.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.Ctgry != null && t.Ctgry.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.Dept != null && t.Dept.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.Company != null && t.Company.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+              (t.FaxB != null && t.FaxB.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+            (t.MobA != null && t.MobA != null && t.MobA.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+              (t.MobB != null && t.MobB.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+              (t.MobC != null && t.MobC.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+              (t.ResA != null && t.ResA.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+              (t.ResB != null && t.ResB.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.ResC != null && t.ResC.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.OffA != null && t.OffA.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.OffB != null && t.OffB.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.OffC != null && t.OffC.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.ExtA != null && t.ExtA.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.ExtB != null && t.ExtB.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.ExtC != null && t.ExtC.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.EmailA != null && t.EmailA.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.EmailB != null && t.EmailB.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+             (t.EmailC != null && t.EmailC.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))).ToList();
+
+
+            isFilter = true;
+            loading = false;
+            Console.WriteLine(filteredData);
+            StateHasChanged();
+        }
+        else
+        {
+           filteredData = telephones;
+        }
+       
+        StateHasChanged();
+    }
+
+ 
+    ////////Export Code.//////////////////
+    public byte[] GenerateExcelFile()
+    {
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+            // add column headers to the worksheet
+            worksheet.Cells[1, 1].Value = "SrNo";
+            worksheet.Cells[1, 2].Value = "ITSID";
+            worksheet.Cells[1, 3].Value = "Fname";
+            worksheet.Cells[1, 4].Value = "Ctgry";
+            worksheet.Cells[1, 5].Value = "Dept";
+            worksheet.Cells[1, 6].Value = "Company";
+            worksheet.Cells[1, 7].Value = "AddA";
+            worksheet.Cells[1, 8].Value = "CityA";
+            worksheet.Cells[1, 9].Value = "PinA";
+            worksheet.Cells[1, 10].Value = "StateA";
+            worksheet.Cells[1, 11].Value = "CntryA";
+            worksheet.Cells[1, 12].Value = "FaxA";
+            worksheet.Cells[1, 13].Value = "FaxB";
+            worksheet.Cells[1, 14].Value = "MobA";
+            worksheet.Cells[1, 15].Value = "MobB";
+            worksheet.Cells[1, 16].Value = "MobC";
+            worksheet.Cells[1, 17].Value = "ResA";
+            worksheet.Cells[1, 18].Value = "ResB";
+            worksheet.Cells[1, 19].Value = "ResC";
+            worksheet.Cells[1, 20].Value = "OffA";
+            worksheet.Cells[1, 21].Value = "OffB";
+            worksheet.Cells[1, 22].Value = "OffC";
+            worksheet.Cells[1, 23].Value = "ExtA";
+            worksheet.Cells[1, 24].Value = "ExtB";
+            worksheet.Cells[1, 25].Value = "ExtC";
+            worksheet.Cells[1, 26].Value = "EmailA";
+            worksheet.Cells[1, 27].Value = "EmailB";
+            worksheet.Cells[1, 28].Value = "EmailC";
+            worksheet.Cells[1, 29].Value = "LastModify";
+
+            int rowIndex = 2;
+            foreach (var telephone in filteredData)
+            {
+                worksheet.Cells[rowIndex, 1].Value = telephone.SrNo;
+                worksheet.Cells[rowIndex, 2].Value = telephone.Itsid;
+                worksheet.Cells[rowIndex, 3].Value = telephone.Fname;
+                worksheet.Cells[rowIndex, 4].Value = telephone.Ctgry;
+                worksheet.Cells[rowIndex, 5].Value = telephone.Dept;
+                worksheet.Cells[rowIndex, 6].Value = telephone.Company;
+                worksheet.Cells[rowIndex, 7].Value = telephone.AddA;
+                worksheet.Cells[rowIndex, 8].Value = telephone.CityA;
+                worksheet.Cells[rowIndex, 9].Value = telephone.PinA;
+                worksheet.Cells[rowIndex, 10].Value = telephone.StateA;
+                worksheet.Cells[rowIndex, 11].Value = telephone.CntryA;
+                worksheet.Cells[rowIndex, 12].Value = telephone.FaxA;
+                worksheet.Cells[rowIndex, 13].Value = telephone.FaxB;
+                worksheet.Cells[rowIndex, 14].Value = telephone.MobA;
+                worksheet.Cells[rowIndex, 15].Value = telephone.MobB;
+                worksheet.Cells[rowIndex, 16].Value = telephone.MobC;
+                worksheet.Cells[rowIndex, 17].Value = telephone.ResA;
+                worksheet.Cells[rowIndex, 18].Value = telephone.ResB;
+                worksheet.Cells[rowIndex, 19].Value = telephone.ResC;
+                worksheet.Cells[rowIndex, 20].Value = telephone.OffA;
+                worksheet.Cells[rowIndex, 21].Value = telephone.OffB;
+                worksheet.Cells[rowIndex, 22].Value = telephone.OffC;
+                worksheet.Cells[rowIndex, 23].Value = telephone.ExtA;
+                worksheet.Cells[rowIndex, 24].Value = telephone.ExtB;
+                worksheet.Cells[rowIndex, 25].Value = telephone.ExtC;
+                worksheet.Cells[rowIndex, 26].Value = telephone.EmailA;
+                worksheet.Cells[rowIndex, 27].Value = telephone.EmailB;
+                worksheet.Cells[rowIndex, 28].Value = telephone.EmailC;
+                worksheet.Cells[rowIndex, 29].Value = telephone.LastModify;
+                rowIndex++;
+            }
+
+            return package.GetAsByteArray();
+        }
+    }
+
+    public async Task ExportToExcel()
+    {
+
+
+        // Generate the Excel file
+        byte[] excelBytes = GenerateExcelFile();
+
+        // Download the Excel file
+        await JSRuntime.InvokeVoidAsync("saveAsFile", "data.xlsx", Convert.ToBase64String(excelBytes), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    }
+  
+}
